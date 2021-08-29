@@ -4,7 +4,6 @@
       <div>
         <h1>devfinder</h1>
       </div>
-
       <div
         style="cursor: pointer"
         class="toggle"
@@ -25,13 +24,20 @@
         </div>
       </div>
     </div>
+
+    <div class="search--input">
+      <Search />
+    </div>
   </div>
 </template>
 
 <script>
+import Search from "./components/Search.vue";
 export default {
   name: "App",
-  components: {},
+  components: {
+    Search,
+  },
   data() {
     return {
       theme: "",
@@ -76,8 +82,9 @@ body {
   text-align: center;
   background-color: var(--background-color);
   color: var(--text-color);
-  padding: 60px 120px;
+  padding: 60px 0;
   height: 100vh;
+  overflow: hidden;
 }
 h1 {
   padding: 0;
@@ -96,6 +103,7 @@ h1 {
   align-items: flex-end;
   .dark-light {
     text-transform: uppercase;
+    font-weight: 500;
   }
   .dark-light--icon {
     width: 18px;
