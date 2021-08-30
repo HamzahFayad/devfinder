@@ -17,8 +17,22 @@
           <p>Joined: 25 Jan 2018</p>
         </div>
         <a :href="userInfos.html_url">@{{ userInfos.login }}</a>
-        <p v-if="userInfos.bio">{{ userInfos.bio }}</p>
+        <p class="bio" v-if="userInfos.bio">{{ userInfos.bio }}</p>
         <p v-else>This profile has no bio</p>
+        <div class="infos">
+          <div>
+            <p>Repos</p>
+            <h3>{{ userInfos.public_repos }}</h3>
+          </div>
+          <div>
+            <p>Followers</p>
+            <h3>{{ userInfos.followers }}</h3>
+          </div>
+          <div>
+            <p>Following</p>
+            <h3>{{ userInfos.following }}</h3>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -88,15 +102,18 @@ input::placeholder {
   width: 800px;
   border-radius: 8px;
   padding: 20px 6px;
-  display: block;
   margin: 25px auto;
   display: flex;
   flex-flow: row wrap;
+  justify-content: center;
   gap: 20px;
   img {
     border-radius: 50%;
-    max-width: 150px;
-    height: 150px;
+    max-width: 120px;
+    height: 120px;
+  }
+  h2 {
+    margin: 3% 0;
   }
   &__content {
     text-align: left;
@@ -111,6 +128,29 @@ input::placeholder {
       flex-flow: row nowrap;
       justify-content: space-between;
       align-items: center;
+    }
+    .bio {
+      padding: 8px 0;
+    }
+    a {
+      color: var(--accent-color);
+    }
+  }
+  .infos {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-around;
+    background: var(--background-color);
+    border-radius: 8px;
+    height: 75px;
+    margin: 12px 0;
+    div {
+      align-self: center;
+    }
+    h3 {
+      margin: 1% 0;
+      font-weight: 800;
+      font-size: 1.4rem;
     }
   }
 }
