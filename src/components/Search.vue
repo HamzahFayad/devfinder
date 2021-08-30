@@ -14,7 +14,7 @@
       <div class="userCard__content">
         <div class="c1">
           <h2>{{ userInfos.login }}</h2>
-          <p>Joined: 25 Jan 2018</p>
+          <p>Joined {{ joinedDate }}</p>
         </div>
         <a :href="userInfos.html_url" target="_black">@{{ userInfos.login }}</a>
         <p class="bio" v-if="userInfos.bio">{{ userInfos.bio }}</p>
@@ -128,6 +128,7 @@ export default {
     return {
       username: "",
       userInfos: "",
+      joinedDate: "",
     };
   },
   methods: {
@@ -137,6 +138,13 @@ export default {
         .then((res) => {
           console.log(res.data);
           this.userInfos = res.data;
+          let date = res.data.created_at;
+          let format = new Date(date);
+          let day = format.getUTCDate();
+          let month = format.getUTCMonth() + 1;
+          let year = format.getUTCFullYear();
+          let formattedDate = day + "." + month + "." + year;
+          this.joinedDate = formattedDate;
         })
         .catch((err) => console.log(err));
     },
