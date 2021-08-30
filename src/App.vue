@@ -85,6 +85,7 @@ body {
   padding: 60px 0;
   height: 100vh;
   overflow: hidden;
+  transition: all 800ms;
 }
 h1 {
   padding: 0;
