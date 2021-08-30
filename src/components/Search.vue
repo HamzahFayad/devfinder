@@ -8,6 +8,21 @@
     />
 
     <div class="userCard" v-if="userInfos">
+      <div class="userCard__img">
+        <img :src="userInfos.avatar_url" alt="" />
+      </div>
+      <div class="userCard__content">
+        <div class="c1">
+          <h2>{{ userInfos.login }}</h2>
+          <p>Joined: 25 Jan 2018</p>
+        </div>
+        <a :href="userInfos.html_url">@{{ userInfos.login }}</a>
+        <p v-if="userInfos.bio">{{ userInfos.bio }}</p>
+        <p v-else>This profile has no bio</p>
+      </div>
+    </div>
+
+    <!--<div class="userCard" v-if="userInfos">
       <img :src="userInfos.avatar_url" alt="" />
       <p>Name: {{ userInfos.login }}</p>
       <p>Bio: {{ userInfos.bio }}</p>
@@ -21,7 +36,7 @@
 
       <p>Location: {{ userInfos.location }}</p>
       <a :href="userInfos.blog">Blog: {{ userInfos.blog }}</a>
-    </div>
+    </div>-->
   </div>
 </template>
 
@@ -75,10 +90,28 @@ input::placeholder {
   padding: 20px 6px;
   display: block;
   margin: 25px auto;
+  display: flex;
+  flex-flow: row wrap;
+  gap: 20px;
   img {
     border-radius: 50%;
     max-width: 150px;
     height: 150px;
+  }
+  &__content {
+    text-align: left;
+    width: 70%;
+    h1,
+    p {
+      padding: 0;
+      margin: 0;
+    }
+    .c1 {
+      display: flex;
+      flex-flow: row nowrap;
+      justify-content: space-between;
+      align-items: center;
+    }
   }
 }
 a {
@@ -91,6 +124,23 @@ a {
   input,
   .userCard {
     width: 350px;
+  }
+  .userCard {
+    &__content {
+      text-align: center;
+      width: 100%;
+      margin: 0 auto;
+      img {
+        display: block;
+        margin: 0 auto;
+      }
+      .c1 {
+        flex-flow: column nowrap;
+        h2 {
+          order: 2;
+        }
+      }
+    }
   }
 }
 </style>
