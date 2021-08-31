@@ -203,7 +203,8 @@ input::placeholder {
     height: 120px;
   }
   h2 {
-    margin: 3% 0;
+    margin: 0;
+    padding-bottom: 4%;
   }
   &__content {
     text-align: left;
@@ -279,6 +280,10 @@ a {
   text-decoration: none;
   font-weight: 600;
   color: var(--text-color);
+  transition: 250ms ease-out;
+  &:hover {
+    text-decoration: underline;
+  }
 }
 .err {
   padding: 40px 0;
@@ -306,11 +311,15 @@ a {
       }
     }
     .infos2 {
-      grid-template-columns: repeat(1, 1fr);
+      grid-template-columns: 1fr;
       grid-gap: 0;
       div {
         display: block;
         padding: 6px 0;
+        svg {
+          display: block;
+          margin: 1.5% auto;
+        }
       }
     }
   }

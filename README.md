@@ -1,5 +1,7 @@
 # Devfinder
 
+![Design preview for the Todo app coding challenge](/src/assets/preview.png)
+
 The challenge is to build out a GitHub user search app using the GitHub users API.
 
 The users should be able to:
