@@ -7,7 +7,8 @@
       @keydown.enter="search()"
     />
 
-    <div class="userCard" v-if="userInfos">
+    <div class="err" v-if="notFound === true">No user found</div>
+    <div class="userCard" v-if="userInfos && notFound === false">
       <div class="userCard__img">
         <img :src="userInfos.avatar_url" alt="" />
       </div>
@@ -129,6 +130,7 @@ export default {
       username: "",
       userInfos: "",
       joinedDate: "",
+      notFound: false,
     };
   },
   methods: {
@@ -137,16 +139,29 @@ export default {
         .get("https://api.github.com/users/" + this.username)
         .then((res) => {
           console.log(res.data);
-          this.userInfos = res.data;
-          let date = res.data.created_at;
-          let format = new Date(date);
-          let day = format.getUTCDate();
-          let month = format.getUTCMonth() + 1;
-          let year = format.getUTCFullYear();
-          let formattedDate = day + "." + month + "." + year;
-          this.joinedDate = formattedDate;
+          if (res) {
+            this.userInfos = res.data;
+            let date = res.data.created_at;
+            let format = new Date(date);
+            let day = format.getUTCDate();
+            let month = format.getUTCMonth() + 1;
+            let year = format.getUTCFullYear();
+            let formattedDate = day + "." + month + "." + year;
+            this.joinedDate = formattedDate;
+          }
+          this.notFound = false;
         })
-        .catch((err) => console.log(err));
+        .catch((err) => {
+          if (err.response) {
+            console.log(err.response);
+          } else if (err.request) {
+            console.log("no response found");
+          } else {
+            console.log(err);
+            this.notFound = true;
+          }
+          this.notFound = true;
+        });
     },
   },
 };
@@ -264,6 +279,9 @@ a {
   text-decoration: none;
   font-weight: 600;
   color: var(--text-color);
+}
+.err {
+  padding: 40px 0;
 }
 
 @media only screen and (max-width: 825px) {
